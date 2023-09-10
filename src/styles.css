@@ -1,0 +1,23 @@
+.loader{
+    display: none;
+}
+
+.error {
+    display: none;
+}
+
+.visible{
+    display: block;
+}
+.hide{
+    display: none;
+}
+
+.cat-info{
+    display: flex;
+    gap: 16px;
+    margin-top: 24px;
+}
+.tmp {
+    font-weight: bold;
+}
