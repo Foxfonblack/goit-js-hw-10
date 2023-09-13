@@ -1,25 +1,31 @@
 import { getBreeds, getBreedByID } from "./cat-api"
+import SlimSelect from "slim-select"
+import 'slim-select/dist/slimselect.css'
+import Notiflix from 'notiflix';
+
 
 const select = document.querySelector('.breed-select')
 const loader = document.querySelector('.loader')
 const err = document.querySelector('.error')
 const catInfo = document.querySelector('.cat-info')
 
-loader.classList.add('visible')
+loader.classList.add('show')
 select.classList.add('hide')
 
 getBreeds().then(data=>{
         console.log(data)
     const breedsMarkup = createSelectOptions(data);
 select.insertAdjacentHTML('beforeend', breedsMarkup)
+new SlimSelect({select:".breed-select"})
 select.classList.remove('hide')
 }).catch(error=>{
     console.log(error.message)
-    err.classList.add('visible')
+    // err.classList.add('visible')
+    Notiflix.Notify.failure('Oops! Something went wrong! Try reloading the page!')
  
 
 }).finally(()=>{
-    loader.classList.remove('visible')
+    loader.classList.remove('show')
    
 
 })
@@ -33,7 +39,7 @@ function createSelectOptions(arr){
 
 select.addEventListener('change', onSelectChange)
 function onSelectChange(evt){
-loader.classList.add('visible')
+loader.classList.add('show')
 catInfo.innerHTML = "";
 const index = evt.target.selectedIndex
 console.log(index);
@@ -48,9 +54,10 @@ catInfo.innerHTML = markup
 
 })
 .catch(error=>{console.log(error.message)
-err.classList.add('visible')
+// err.classList.add('visible')
+Notiflix.Notify.failure('Oops! Something went wrong! Try reloading the page!')
 }).finally(()=>{
-    loader.classList.remove('visible')
+    loader.classList.remove('show')
 
     
 
